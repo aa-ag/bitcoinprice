@@ -1,6 +1,7 @@
 ###--- IMPORTS ---###
 import requests
-from pprint import pprint
+import json
+import pandas as pd
 
 
 ###--- FUNCTIONS ---###
@@ -10,12 +11,19 @@ def get_price():
     # print(res.url) # 200
     # print(res.status_code)
 
-    res = requests.get('https://api.coingecko.com/api/v3/coins/list').json()
+    # res = requests.get('https://api.coingecko.com/api/v3/coins/list').json()
 
-    cryptos = [i['name'] for i in res]
+    # cryptos = [i['name'] for i in res]
 
     # print(cryptos)
-    print(len(cryptos))  # 6126
+    # print(len(cryptos))  # 6126
+
+    res = requests.get(
+        'https://api.coingecko.com/api/v3/coins/bitcoin/tickers').json()
+
+    j = json.dumps(res, indent=4)
+
+    print(j)
 
 
 ###--- DRIVER CODE ---###
