@@ -2,30 +2,51 @@
 import requests
 import json
 import pandas as pd
+import shrimpy
+import plotly.graph_objects as go
+import settings
 
+
+###--- GLOBAL VARIABLES ---###
+shrimpy_public_key = settings.SHRIMPY_PUBLIC_KEY
+shrimpy_private_key = settings.SHRIMPY_PRIVATE_KEY
+
+client = shrimpy.ShrimpyApiClient(shrimpy_public_key, shrimpy_private_key)
 
 ###--- FUNCTIONS ---###
 
-def get_price():
-    # res = requests.get('https://api.coingecko.com/api/v3/ping')
-    # print(res.url) # 200
-    # print(res.status_code)
 
-    # res = requests.get('https://api.coingecko.com/api/v3/coins/list').json()
+def draw_chart():
+    '''
+     using API key, create get data, and draw chart
+    '''
+    candles = client.get_candles(
+        'binance',  # exchange
+        'XLM',      # base_trading_symbol
+        'BTC',      # quote_trading_symbol
+        '15m'       # interval
+    )
 
-    # cryptos = [i['name'] for i in res]
+    dates = []
+    open_data = []
+    high_data = []
+    low_data = []
+    close_data = []
 
-    # print(cryptos)
-    # print(len(cryptos))  # 6126
+    for candle in candles:
+        dates.append(candle['time'])
+        open_data.append(candle['open'])
+        high_data.append(candle['high'])
+        low_data.append(candle['low'])
+        close_data.append(candle['close'])
 
-    res = requests.get(
-        'https://api.coingecko.com/api/v3/coins/bitcoin/tickers').json()
+    fig = go.Figure(data=[go.Candlestick(x=dates,
+                                         open=open_data, high=high_data,
+                                         low=low_data, close=close_data)])
 
-    j = json.dumps(res, indent=4)
-
-    print(j)
+    fig.show()
 
 
 ###--- DRIVER CODE ---###
 if __name__ == "__main__":
-    get_price()
+    draw_chart()
