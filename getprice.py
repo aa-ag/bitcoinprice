@@ -18,13 +18,14 @@ client = shrimpy.ShrimpyApiClient(shrimpy_public_key, shrimpy_private_key)
 
 def draw_chart():
     '''
-     using API key, create get data, and draw chart
+     using API key, create get data, and draw/plot chart
     '''
+
     candles = client.get_candles(
-        'binance',  # exchange
-        'XLM',      # base_trading_symbol
+        'bittrex',  # exchange
+        'LTC',      # base_trading_symbol
         'BTC',      # quote_trading_symbol
-        '15m'       # interval
+        '1d'        # interval: 1m, 5m, 15m, 1h, 6h, or 1d
     )
 
     dates = []

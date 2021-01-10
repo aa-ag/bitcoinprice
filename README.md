@@ -1,6 +1,6 @@
 # Prices
 
-Python script to consume `CoinGecko`'s [API](https://www.coingecko.com/api/documentations/v3).
+Python script to get crypto currencies' prices and draw historic price chart using `shrimpy`'s [API](https://developers.shrimpy.io/docs/#introduction).
 
 #### to run
 
