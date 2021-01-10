@@ -68,6 +68,16 @@ def available_data():
 
     df = pd.DataFrame(exchange_assets)
 
+    print(f"Number of columns: {df.columns}")
+    # Number of columns: Index(['id', 'name', 'symbol', 'tradingSymbol'], dtype='object')
+    print(f"Number of rows: {df.index}")
+    # Number of rows: RangeIndex(start=0, stop=107, step=1)
+
+    # [!] to display entire dataframe with no truncation
+    pd.set_option('display.max_rows', None)
+    pd.set_option('display.max_columns', None)
+    pd.set_option('display.width', None)
+    pd.set_option('display.max_colwidth', -1)
     print(df)
 
 
