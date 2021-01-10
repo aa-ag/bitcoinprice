@@ -66,8 +66,9 @@ def available_data():
     # ASSETS
     exchange_assets = client.get_exchange_assets('bittrex')
 
-    for i, asset in enumerate(exchange_assets):
-        print(f"{i}. {asset['name']}. Symbol: {asset['symbol']}")
+    df = pd.DataFrame(exchange_assets)
+
+    print(df)
 
 
 ###--- DRIVER CODE ---###
