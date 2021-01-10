@@ -18,7 +18,7 @@ client = shrimpy.ShrimpyApiClient(shrimpy_public_key, shrimpy_private_key)
 
 def draw_chart():
     '''
-     using API key, create get data, and draw/plot chart
+     using API key, create get data, and draw/plotadd chart
     '''
 
     candles = client.get_candles(
@@ -48,6 +48,22 @@ def draw_chart():
     fig.show()
 
 
+def available_data():
+    '''
+     Lists all available data in API
+    '''
+    supported_exchanges = client.get_supported_exchanges()
+
+    exchanges_names = [exchange_name for exchange_name in supported_exchanges]
+
+    print(
+        f"\nThere are {len(exchanges_names)} available exchanges, and they are:")
+
+    for i, x in enumerate(exchanges_names):
+        print(f" {i + 1} {x['exchange']}")
+
+
 ###--- DRIVER CODE ---###
 if __name__ == "__main__":
-    draw_chart()
+    # draw_chart()
+    available_data()
