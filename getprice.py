@@ -52,15 +52,22 @@ def available_data():
     '''
      Lists all available data in API
     '''
+    # SUPPORTED EXCHANGES
     supported_exchanges = client.get_supported_exchanges()
 
     exchanges_names = [exchange_name for exchange_name in supported_exchanges]
 
-    print(
-        f"\nThere are {len(exchanges_names)} available exchanges, and they are:")
+    # print(
+    #     f"\nThere are {len(exchanges_names)} available exchanges, and they are:")
 
-    for i, x in enumerate(exchanges_names):
-        print(f" {i + 1} {x['exchange']}")
+    # for i, x in enumerate(exchanges_names):
+    # print(f" {i + 1} {x['exchange']}")
+
+    # ASSETS
+    exchange_assets = client.get_exchange_assets('bittrex')
+
+    for i, asset in enumerate(exchange_assets):
+        print(f"{i}. {asset['name']}. Symbol: {asset['symbol']}")
 
 
 ###--- DRIVER CODE ---###
